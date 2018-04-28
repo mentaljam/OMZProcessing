@@ -1,0 +1,25 @@
+[general]
+name=OMZ Processing
+qgisMinimumVersion=3.0
+description=A QGIS processing provider.
+version=0.1
+author=Petr Tsymbarovich
+email=petr@tsymbarovich.ru
+
+about=A set of processing algorithms used in NTs OMZ.
+
+homepage=https://github.com/mentaljam/OMZProcessing
+repository=https://github.com/mentaljam/OMZProcessing
+tracker=https://github.com/mentaljam/OMZProcessing/issues
+
+tags=python
+category=Processing
+
+icon=icon.png
+
+experimental=False
+deprecated=False
+
+changelog=
+    Version 0.1 (2018-04-29)
+    - Initial release
