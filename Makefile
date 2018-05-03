@@ -5,37 +5,40 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst 
 
 # Platform commands
 ifeq ($(OS),Windows_NT)
-    python3 = $(addprefix "$(OSGEO4W_ROOT)",/bin/python3)
-    pylupdate5 = cmd //c $(python3) -m PyQt5.pylupdate_main
+	# Set paths to call pylupdate5 correctly
+	PATH		:= /osgeo4w/apps/Qt5/bin:$(PATH)
+	PYTHONHOME	:= /osgeo4w/apps/Python36
+	# Set pylupdate5 command
+	pylupdate5 = cmd //c python3 -m PyQt5.pylupdate_main
 else
-    pylupdate5 = pylupdate5
+	pylupdate5 = pylupdate5
 endif
 
 
 #### Configuration
 
 # Plugin name
-PLUGINNAME   = omzprocessing
+PLUGINNAME	= omzprocessing
 
 # Locales
-LOCALES      = ru
+LOCALES		= ru
 
 # List ts and qm files
-TS_FILES     = $(patsubst %,i18n/omzprocessing_%.ts,$(LOCALES))
-QM_FILES     = $(patsubst %.ts,%.qm,$(TS_FILES))
+TS_FILES	= $(patsubst %,i18n/omzprocessing_%.ts,$(LOCALES))
+QM_FILES	= $(patsubst %.ts,%.qm,$(TS_FILES))
 
 # List py files
-PY_FILES     = $(call rwildcard,,*.py)
+PY_FILES	= $(call rwildcard,,*.py)
 
 # List images
-PNG_FILES	 = $(call rwildcard,,*.png)
+PNG_FILES	= $(call rwildcard,,*.png)
 
 # Install files
 INSTALL_FILES = \
 	$(PY_FILES) \
-    $(QM_FILES) \
-    $(PNG_FILES) \
-    metadata.txt
+	$(QM_FILES) \
+	$(PNG_FILES) \
+	metadata.txt
 
 
 #### Targets
@@ -55,13 +58,13 @@ help:
 	@echo clean
 
 $(QM_FILES): %.qm : %.ts
-	@echo "qm:  $@"
+	@echo "qm: $@"
 	@lrelease -silent $<
 
 qm: $(QM_FILES)
 
 $(TS_FILES):
-	@echo "ts:  $@"
+	@echo "ts: $@"
 	@$(pylupdate5) $(PY_FILES) -ts $@
 
 update_ts:
