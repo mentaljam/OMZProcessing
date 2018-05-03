@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<TS version="2.0" language="ru_RU">
 <context>
     <name>DensityMapAlgorithm</name>
     <message>
@@ -47,7 +47,7 @@
 &lt;p&gt;Resolution of the output raster. &lt;b&gt;Pay attention:&lt;/b&gt; values of the CRS of input layer are used.&lt;/p&gt;
 &lt;h3&gt;Density map&lt;/h3&gt;
 &lt;p&gt;An output raster for saving the resulting density map.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Алгоритм расчитывает карту плотности покрытия (карту перекрытий) для векторного слоя полигонов.&lt;/p&gt;
+        <translation>&lt;p&gt;Алгоритм рассчитывает карту плотности покрытия (карту перекрытий) для векторного слоя полигонов.&lt;/p&gt;
 &lt;h3&gt;Исходный слой&lt;/h3&gt;
 &lt;p&gt;Исходный векторный слой полигонов.&lt;/p&gt;
 &lt;h3&gt;Разрешение&lt;/h3&gt;

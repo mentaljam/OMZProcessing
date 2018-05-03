@@ -2,7 +2,7 @@
 name=OMZ Processing
 qgisMinimumVersion=3.0
 description=A QGIS processing provider.
-version=0.1
+version=0.1.1
 author=Petr Tsymbarovich
 email=petr@tsymbarovich.ru
 
