@@ -7,10 +7,8 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst 
 ifeq ($(OS),Windows_NT)
     python3 = $(addprefix "$(OSGEO4W_ROOT)",/bin/python3)
     pylupdate5 = cmd //c $(python3) -m PyQt5.pylupdate_main
-	mkdir = mkdir
 else
     pylupdate5 = pylupdate5
-	mkdir = mkdir -p
 endif
 
 
@@ -87,7 +85,7 @@ package: $(INSTALL_FILES)
 	@echo "------------------------------"
 	@echo "      Preparing package"
 	@echo "------------------------------"
-	@$(mkdir) dist
+	@mkdir -p dist
 	@rm -fv $(wildcard dist/$(PLUGINNAME)*.zip)
 	@$(eval ARCHIVE := $(PLUGINNAME)_$(strip $(shell awk -F = '/version/ {print $$2}' metadata.txt)).zip)
 	@echo Adding files to $(ARCHIVE):
