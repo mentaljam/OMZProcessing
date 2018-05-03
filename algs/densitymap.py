@@ -9,29 +9,25 @@ __date__ = '2018-04-28'
 __copyright__ = '(C) 2018 by Petr Tsymbarovich'
 
 
-import os.path
-from PyQt5.QtGui import QIcon
+from .omzalgorithm import OmzAlgorithm
 from PyQt5.QtCore import QCoreApplication
 from qgis.core import (
     QgsProcessing,
-    QgsProcessingAlgorithm,
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterNumber,
     QgsProcessingParameterRasterDestination,
     QgsRasterFileWriter,
     Qgis,
 )
-from PIL import (
-    Image,
-    ImageDraw,
-)
-import numpy
 
 
-class DensityMapAlgorithm(QgsProcessingAlgorithm):
+class DensityMapAlgorithm(OmzAlgorithm):
     '''
     The class implements the algorithm.
     '''
+
+    OmzAlgorithm.ICON = 'densitymap.png'
+    OmzAlgorithm.DEPENDENCIES = ['PIL', 'numpy']
 
     INPUT = 'INPUT'
     RESOLUTION = 'RESOLUTION'
@@ -57,22 +53,6 @@ class DensityMapAlgorithm(QgsProcessingAlgorithm):
         Returns the translated algorithm name.
         '''
         return self.tr('Density Map')
-
-    def icon(self):
-        iconpath = os.path.join(os.path.dirname(__file__), 'densitymap.png')
-        return QIcon(iconpath)
-
-    def group(self):
-        '''
-        Returns the name of the group this algorithm belongs to.
-        '''
-        return self.tr('NTs OMZ')
-
-    def groupId(self):
-        '''
-        Returns the unique ID of the group this algorithm belongs to.
-        '''
-        return 'ntsomz_scripts'
 
     def shortHelpString(self):
         '''
@@ -124,6 +104,12 @@ class DensityMapAlgorithm(QgsProcessingAlgorithm):
         '''
         Here is where the processing itself takes place.
         '''
+
+        from PIL import (
+            Image,
+            ImageDraw,
+        )
+        import numpy
 
         source = self.parameterAsSource(
             parameters,
