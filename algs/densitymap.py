@@ -160,6 +160,9 @@ class DensityMapAlgorithm(QgsProcessingAlgorithm):
 
         # Create output buffer
         density = numpy.zeros((ysize, xsize), dtype=numpy.uint16)
+        # Create geometry mask buffer
+        mask = Image.new('1', (xsize, ysize), 0)
+        draw = ImageDraw.Draw(mask)
 
         # Iterate over features from source
         features = source.getFeatures()
@@ -180,10 +183,11 @@ class DensityMapAlgorithm(QgsProcessingAlgorithm):
                     points.append((x, y))
 
             # Generate geometry mask
-            mask = Image.new('L', (xsize, ysize), 0)
-            draw = ImageDraw.Draw(mask)
             draw.polygon(points, 1)
+            # Add geometry mask to the result raster
             density = numpy.add(density, numpy.array(mask))
+            # Reset the mask
+            draw.rectangle([0, 0, xsize, ysize], fill=0)
 
             # Update the progress bar
             feedback.setProgress(int(current * total))
@@ -193,5 +197,7 @@ class DensityMapAlgorithm(QgsProcessingAlgorithm):
         provider = writer.createOneBandRaster(Qgis.UInt16, xsize, ysize, extent, source.sourceCrs())
         provider.write(density.astype('H').tostring(), 1, xsize, ysize, 0, 0)
         density = None
+        draw = None
+        mask = None
 
         return result
