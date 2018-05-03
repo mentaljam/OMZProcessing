@@ -55,7 +55,7 @@
     <message>
         <location filename="../algs/omzalgorithm.py" line="41"/>
         <source>NTs OMZ</source>
-        <translation>НЦ ОМЗ 789</translation>
+        <translation>НЦ ОМЗ</translation>
     </message>
     <message>
         <location filename="../algs/omzalgorithm.py" line="61"/>

@@ -2,7 +2,7 @@
 name=OMZ Processing
 qgisMinimumVersion=3.0
 description=A QGIS processing provider.
-version=0.1.1
+version=0.2
 author=Petr Tsymbarovich
 email=petr@tsymbarovich.ru
 
@@ -21,5 +21,9 @@ experimental=False
 deprecated=False
 
 changelog=
+    Version 0.2 (2018-03-05)
+    - Check dependencies for algorithms and show messages on errors
+    - Refactoring
+    - Update translations
     Version 0.1 (2018-04-29)
     - Initial release
